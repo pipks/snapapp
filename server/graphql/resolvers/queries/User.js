@@ -1,6 +1,6 @@
 const User = {
     snaps: async (parent, args, { Snap }) => {
-        return await Snap.find({user_id:parent._id})
+        return await Snap.find({user_id: parent._id});  
     }
 };
 

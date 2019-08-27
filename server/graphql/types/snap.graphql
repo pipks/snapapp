@@ -1,9 +1,9 @@
-type Query{
+type Query {
     snap(id: ID!): Snap!
     snaps: [Snap!]!
 }
 
-type Snap{
+type Snap {
     id: ID!
     text: String!
     createdAt: String!

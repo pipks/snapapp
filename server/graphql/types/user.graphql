@@ -1,14 +1,13 @@
-type Query{
+type Query {
     user(id: ID!): User!
     users: [User!]!
-
-    activeUser: User
 }
 
-type User{
-    id: ID!
+type User {
+    id: String
     username: String!
     createdAt: String
+    password: String!
     snaps: [Snap!]!
 }
 
@@ -17,12 +16,12 @@ type Mutation {
     signIn(data: SigninUserInput!): Token
 }
 
-input CreateUserInput{
+input CreateUserInput {
     username: String!
     password: String!
 }
 
-input SigninUserInput{
+input SigninUserInput {
     username: String!
     password: String!
 }

@@ -14,19 +14,19 @@ const userSchema = new Schema({
     },
     createdAt: {
         type: Date,
-        default: Date.now,
+        default: Date.now
     }
 });
 
-userSchema.pre('save', function(next) {
+userSchema.pre('save', function (next) {
     if (!this.isModified('password')){
-        return next();
+        return next();    
     }
 
     bcrypt.hash(this.password, 10)
         .then(hash => {
-            this.password = hash;
-            next();
+           this.password = hash;
+           next(); 
         });
 });
 

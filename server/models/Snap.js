@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const snapSchema = new Schema({
     user_id: {
-        type:Schema.ObjectId
+        type: Schema.ObjectId
     },
     text: {
         type: String,
@@ -11,7 +11,7 @@ const snapSchema = new Schema({
     },
     createdAt: {
         type: Date,
-        default: Date.now,
+        default: Date.now
     }
 });
 

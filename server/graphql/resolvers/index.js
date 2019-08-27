@@ -1,15 +1,14 @@
-//query resolvers
+//Query resolvers
 const Query = require('./queries/Query');
 const Snap = require('./queries/Snap');
 const User = require('./queries/User');
 
-//mutation resolvers
-const Mutation = require('./mutations/index');
+//Mutation resolvers
+const Mutation = require('./mutations');
 
-
-module.exports = {
+module.exports ={ 
     Query,
     Snap,
     User,
     Mutation
-}
+};
