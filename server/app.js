@@ -25,9 +25,9 @@ mongoose.connect(process.env.DB_URI, { useNewUrlParser: true })
 
 const app = express();
 
-app.use(async (req, res, next) => {
-    const token = await req.headers['authorization'];
-    console.log(req.headers);
+app.use((req, res, next) => {
+    const token = req.headers['authorization'];
+    console.log(token);
     next();
 });
 

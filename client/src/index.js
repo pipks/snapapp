@@ -11,7 +11,7 @@ const client = new ApolloClient({
     fetchOptions:{
         credentials: 'include'
     },
-    request: async operation => {
+    request: operation => {
         operation.setContext({
             headers:{
                 authorization: localStorage.getItem('token'),
