@@ -1,10 +1,20 @@
 const Query = {
     user: async (parent, args, { User }) => {
-        return await User.findById(args.id);
+        try {
+            return await User.findById(args.id);
+        } catch (e) {
+            return e;
+        }
     },
     users: async (parent, args, { User }) => {
         return await User.find({}).sort( {'createdAt': 'desc'} );
     },
+    activeUser: async (parent, args, { activeUser, User }) => {
+		if (!activeUser) {
+		  return null;
+		}
+		return await User.findOne({ username: activeUser.username });
+	},
     snap: async (parent, args, { Snap }) => {
         return await Snap.findById(args.id);
     },

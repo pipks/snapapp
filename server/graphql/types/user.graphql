@@ -1,12 +1,16 @@
+scalar Date
+
 type Query {
     user(id: ID!): User!
     users: [User!]!
+
+    activeUser: User
 }
 
 type User {
     id: String
     username: String!
-    createdAt: String
+    createdAt: Date!
     password: String!
     snaps: [Snap!]!
 }

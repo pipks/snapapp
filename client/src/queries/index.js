@@ -17,3 +17,46 @@ export const SIGNIN_USER = gql`
         }
     }
 `;
+
+export const GET_ACTIVE_USER = gql`
+    query {
+        activeUser{
+            id
+            username
+            createdAt
+            snaps{
+                text
+                createdAt
+            }
+        }
+    }
+`;
+
+//Homepage
+export const GET_SNAPS = gql`
+    query {
+        snaps {
+            id
+            text
+            createdAt
+            user {
+                id
+                username
+            }
+        }
+    }
+`;
+
+export const ADD_SNAP = gql`
+    mutation($text: String!, $user_id: ID!) {
+        createSnap(data: { user_id: $user_id, text: $text }) {
+            id
+            text
+            createdAt
+            user{
+                id
+                username
+            }
+        }
+    }
+`;

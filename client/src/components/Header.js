@@ -1,8 +1,11 @@
-import React from 'react'
+import React, {Fragment} from 'react'
 
 import { NavLink } from "react-router-dom";
 
-const Header = (props) => {
+import Logout from './Logout'
+
+const Header = ({session}) => {
+    //console.log(session);
     return (
         <div className="header">
             <div className="logo">
@@ -10,11 +13,28 @@ const Header = (props) => {
             </div>
             <div className="header_menu">
                 <NavLink to="/" exact> snaps</NavLink>
-                <NavLink to="/login"> login</NavLink>
-                <NavLink to="/join"> join</NavLink>
+                {
+                    session.activeUser ? <LinksWithLogin activeUser={session.activeUser}/> : <LinksWithUnLogin />
+                }
             </div>
         </div>
     );
-}
+};
+
+const LinksWithLogin = ({activeUser}) => (
+    <Fragment>
+        <NavLink to="/profile">@{activeUser.username}</NavLink>
+        <Logout />
+    </Fragment>
+);
+
+const LinksWithUnLogin = () => (
+    <Fragment>
+        <NavLink to="/login"> login</NavLink>
+        <NavLink to="/join"> join</NavLink>
+    </Fragment>
+);
+
+
 
 export default Header;

@@ -94,6 +94,15 @@ ul{
   animation: none;
   -webkit-animation: none;
   transition: none;
+
+  
+}
+
+.snaps li.optimistic{
+  opacity: .6;
+  animation: none;
+  -webkit-animation: none;
+  transition: none;
 }
 
 li:nth-child(1) {

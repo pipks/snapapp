@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const { ApolloServer } = require('apollo-server-express');
 const { importSchema } = require('graphql-import');
@@ -13,10 +14,11 @@ const Snap = require('./models/Snap');
 const server = new ApolloServer({
     typeDefs: importSchema('./graphql/schema.graphql'),
     resolvers,
-    context:{
+    context:({req}) => ({
         User,
-        Snap
-    }
+		Snap,
+		activeUser: req.activeUser
+    })
 });
 
 mongoose.connect(process.env.DB_URI, { useNewUrlParser: true })
@@ -25,10 +27,19 @@ mongoose.connect(process.env.DB_URI, { useNewUrlParser: true })
 
 const app = express();
 
-app.use((req, res, next) => {
-    const token = req.headers['authorization'];
-    console.log(token);
-    next();
+app.use(async (req, res, next) => {
+	const token = req.headers['authorization'];
+	if (token && token !== 'null') {
+	  try{
+	  	const activeUser = await jwt.verify(token, process.env.SECRET_KEY);
+	  	req.activeUser = activeUser;
+		//console.log(req.activeUser);
+	  }catch (e) {
+			console.log(e);
+		}
+	}
+
+	next();
 });
 
 
